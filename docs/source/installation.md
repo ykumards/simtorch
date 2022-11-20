@@ -1,23 +1,23 @@
 Installation
 ============
 
-**my-package** supports Python >= 3.7.
+**simtorch** supports Python >= 3.7.
 
 ## Installing with `pip`
 
-**my-package** is available [on PyPI](https://pypi.org/project/my-package/). Just run
+**simtorch** is available [on PyPI](https://pypi.org/project/simtorch/). Just run
 
 ```bash
-pip install my-package
+pip install simtorch
 ```
 
 ## Installing from source
 
-To install **my-package** from source, first clone [the repository](https://github.com/allenai/python-package-template):
+To install **simtorch** from source, first clone [the repository](https://github.com/ykumards/simtorch):
 
 ```bash
-git clone https://github.com/allenai/python-package-template.git
-cd python-package-template
+git clone https://github.com/ykumards/simtorch.git
+cd simtorch
 ```
 
 Then run
