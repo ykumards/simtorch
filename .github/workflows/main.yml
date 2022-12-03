@@ -51,12 +51,12 @@ jobs:
                 python setup.py check
                 python setup.py bdist_wheel sdist
 
-          - python: '3.10'
-            task:
-              name: Style
-              run: |
-                isort --check .
-                black --check .
+          # - python: '3.10'
+          #   task:
+          #     name: Style
+          #     run: |
+          #       isort --check .
+          #       black --check .
 
           - python: '3.10'
             task:
