@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [v0.1.4](https://github.com/ykumards/simtorch/releases/tag/v0.1.4) - 2022-12-03
+
 ## [v0.1.3](https://github.com/ykumards/simtorch/releases/tag/v0.1.3) - 2022-12-03
 
 ## [v0.1.2](https://github.com/ykumards/simtorch/releases/tag/v0.1.2) - 2022-11-20
