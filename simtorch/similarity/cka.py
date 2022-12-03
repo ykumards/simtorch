@@ -14,11 +14,13 @@ class CKA(BaseSimilarity):
         sim_model1: SimilarityModel,
         sim_model2: SimilarityModel,
         device: Union[str, torch.cuda.device] = "cpu",
+        unbiased: bool = False,
     ):
         self.similarity_name = "CKA"
         self.device = device
         self.sim_model1 = sim_model1
         self.sim_model2 = sim_model2
+        self.unbiased = unbiased
 
         self.sim_model1.model.to(self.device)
         self.sim_model2.model.to(self.device)

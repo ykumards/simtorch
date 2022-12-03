@@ -9,7 +9,7 @@ import torch
 
 
 class BaseSimilarity:
-    def __init__(self, sim_model1, sim_model2, device="cpu"):
+    def __init__(self, sim_model1, sim_model2, device="cpu", **kwargs):
         self.similarity_name = "base"
 
         self.sim_model1 = sim_model1
@@ -32,7 +32,9 @@ class BaseSimilarity:
         ylabel: Union[None, str] = None,
         savefig: bool = False,
         save_path: Union[str, Path] = "../output",
+        plot_cmap: str = "magma"
     ):
+        sns.set(rc={"figure.dpi":300, 'savefig.dpi':300})
         title = (
             f"{self.similarity_name}: "
             f"{self.sim_model1.model_name} vs {self.sim_model2.model_name}"
@@ -42,7 +44,7 @@ class BaseSimilarity:
         xlabel = f"{self.sim_model1.model_name}" if xlabel is None else xlabel
         ylabel = f"{self.sim_model2.model_name}" if ylabel is None else ylabel
 
-        ax = sns.heatmap(self.sim_matrix, cmap="PuOr", square=True, cbar=True)
+        ax = sns.heatmap(self.sim_matrix, cmap=plot_cmap, cbar=True)
         ax.set(xlabel=xlabel, ylabel=ylabel, title=title)
         if savefig:
             os.makedirs(save_path, exist_ok=True)
