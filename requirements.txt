@@ -1,1 +1,6 @@
 # Add your own dependencies to this file.
+torch>=1.13
+torchvision
+matplotlib
+seaborn
+tqdm
