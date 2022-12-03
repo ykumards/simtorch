@@ -22,7 +22,7 @@ class BaseSimilarity:
         X = X - X.mean(0, keepdims=True)
         return X / torch.linalg.norm(X)
 
-    def __call__(self, dataloader: Collection):
+    def compute(self, dataloader: Collection):
         pass
 
     def plot_similarity(

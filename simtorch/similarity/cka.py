@@ -45,7 +45,7 @@ class CKA(BaseSimilarity):
 
         return (hsic / (var1 * var2)).detach().cpu()
 
-    def __call__(self, dataloader: Collection):
+    def compute(self, dataloader: Collection):
         cka_matrices = []
         for X, *_ in tqdm(dataloader, total=len(dataloader)):
             X = X.to(self.device)
