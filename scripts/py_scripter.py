@@ -2,7 +2,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torchvision
 from torchvision import datasets, transforms
 
 from simtorch.model.sim_model import SimilarityModel
