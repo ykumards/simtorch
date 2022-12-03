@@ -45,8 +45,8 @@ setup(
     ],
     keywords="",
     url="https://github.com/ykumards/simtorch",
-    author="Allen Institute for Artificial Intelligence",
-    author_email="contact@allenai.org",
+    author="Yogesh Kumar",
+    author_email="ykumards@gmail.com",
     license="Apache",
     packages=find_packages(
         exclude=["*.tests", "*.tests.*", "tests.*", "tests"],
