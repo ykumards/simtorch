@@ -48,9 +48,7 @@ setup(
     author="Yogesh Kumar",
     author_email="ykumards@gmail.com",
     license="Apache",
-    packages=find_packages(
-        exclude=["*.tests", "*.tests.*", "tests.*", "tests"],
-    ),
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     package_data={"simtorch": ["py.typed"]},
     install_requires=read_requirements("requirements.txt"),
     extras_require={"dev": read_requirements("dev-requirements.txt")},

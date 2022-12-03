@@ -104,8 +104,8 @@ html_theme_options = {
                 </svg>
             """,  # noqa: E501
             "class": "",
-        },
-    ],
+        }
+    ]
 }
 
 # -- Hack to get rid of stupid warnings from sphinx_autodoc_typehints --------

@@ -89,6 +89,6 @@ for k, v in sim_model1.model_activations.items():
 # %%
 sim = CKA(sim_model1, sim_model2, device="cuda")
 
-cka_matrix = sim(train_loader)
+cka_matrix = sim.compute(train_loader)
 
 breakpoint()
