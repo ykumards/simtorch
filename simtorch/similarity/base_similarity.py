@@ -34,7 +34,7 @@ class BaseSimilarity:
         save_path: Union[str, Path] = "../output",
         plot_cmap: str = "magma"
     ):
-        sns.set(rc={"figure.dpi":300, 'savefig.dpi':300})
+        sns.set(rc={"figure.dpi": 300, 'savefig.dpi': 300})
         title = (
             f"{self.similarity_name}: "
             f"{self.sim_model1.model_name} vs {self.sim_model2.model_name}"
