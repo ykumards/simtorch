@@ -32,18 +32,18 @@ class CKA(BaseSimilarity):
         H = identity - unit / n
         return torch.matmul(torch.matmul(H, K), H)
 
-    def _linear_HSIC(self, X: torch.tensor, Y: torch.tensor):
+    def linear_HSIC(self, X: torch.tensor, Y: torch.tensor):
         L_X = torch.matmul(X, X.T)
         L_Y = torch.matmul(Y, Y.T)
         return torch.sum(self._centering(L_X) * self._centering(L_Y))
 
     def linear_CKA(self, X: torch.tensor, Y: torch.tensor):
-        X = self._normalize(X)
-        Y = self._normalize(Y)
+        X = self._normalize(X.to(self.device))
+        Y = self._normalize(Y.to(self.device))
 
-        hsic = self._linear_HSIC(X, Y)
-        var1 = torch.sqrt(self._linear_HSIC(X, X))
-        var2 = torch.sqrt(self._linear_HSIC(Y, Y))
+        hsic = self.linear_HSIC(X, Y)
+        var1 = torch.sqrt(self.linear_HSIC(X, X))
+        var2 = torch.sqrt(self.linear_HSIC(Y, Y))
 
         return (hsic / (var1 * var2)).detach().cpu()
 
@@ -61,10 +61,11 @@ class CKA(BaseSimilarity):
 
             # iterate through layers
             for i, (_, activation1) in enumerate(self.sim_model1.model_activations.items()):
+                activation1 = activation1.view(N, -1)
                 for j, (_, activation2) in enumerate(self.sim_model2.model_activations.items()):
-                    activation1 = activation1.reshape(N, -1)
-                    activation2 = activation2.reshape(N, -1)
+                    activation2 = activation2.view(N, -1)
                     layer_cka = self.linear_CKA(X=activation1, Y=activation2)
+
                     batch_cka_matrix[i, j] = layer_cka.item()
 
             cka_matrices.append(batch_cka_matrix)
