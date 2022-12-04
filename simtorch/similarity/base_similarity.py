@@ -50,3 +50,5 @@ class BaseSimilarity:
             os.makedirs(save_path, exist_ok=True)
             filename = "_".join(title.split())
             plt.savefig(os.path.join(save_path, filename))
+
+        return ax
