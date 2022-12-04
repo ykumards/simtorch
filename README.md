@@ -1,5 +1,7 @@
 # simtorch
 
+[![Downloads](https://pepy.tech/badge/simtorch)](https://pepy.tech/project/simtorch)
+
 A Pytorch library to measure the similarity between two neural network representations. The library currently supports the following (dis)similarity measures:
 
 * Centered Kernel Alignment (CKA) - [Kornblith, et al, ICML 2019](http://proceedings.mlr.press/v97/kornblith19a.html)
@@ -12,6 +14,14 @@ The package consists of two components -
 
 * `SimilarityModel` - which is a thin wrapper on `torch.nn.Module()` which adds forwards hooks to store the layer-wise activations (aka representations) in a dictionary.
 * `BaseSimilarity` - which sets the interface for classes that compute similarity between network representations
+
+## Installation
+
+The package is indexed by pypi
+
+```
+pip install simtorch
+```
 
 ## Usage
 
