@@ -123,6 +123,5 @@ class DeltaCKA(BaseSimilarity):
         for mat in cka_matrices:
             self.sim_matrix += mat
         self.sim_matrix /= len(batch_cka_matrix)
-        self.sim_matrix = self.sim_matrix.T
 
         return self.sim_matrix
