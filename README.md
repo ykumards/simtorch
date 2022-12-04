@@ -46,3 +46,24 @@ The similarity matrix can be visualized using the `sim_cka.plot_similarity()` me
 <img title="Centered Kernel Alignment Matrix" alt="Centered Kernel Alignment Matrix" src="assets/img/cka_dense121_res101.png">
 
 
+## Citations
+
+If you use Deconfounded Centered Kernel Alignment (dCKA) for your research, please cite:
+
+```
+@article{cui2022deconfounded,
+  title={Deconfounded Representation Similarity for Comparison of Neural Networks},
+  author={Cui, Tianyu and Kumar, Yogesh and Marttinen, Pekka and Kaski, Samuel},
+  journal={Neural Information Processing Systems (NeurIPS)},
+  year={2022}
+}
+```
+
+## Credits
+
+This has been built by using the following awesome repos as reference:
+
+* [anatome](https://github.com/moskomule/anatome), maintained by [@moskomule](https://github.com/moskomule)
+* [Pytorch-Model-Compare](https://github.com/AntixK/PyTorch-Model-Compare), maintained by [@AntixK](https://github.com/AntixK)
+* [centered-kernel-alignment](https://github.com/Kennethborup/centered_kernel_alignment), maintained by [@Kennethborup](https://github.com/Kennethborup)
+
