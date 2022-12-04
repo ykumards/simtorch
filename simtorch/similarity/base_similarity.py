@@ -41,8 +41,8 @@ class BaseSimilarity:
             if title is None
             else title
         )
-        xlabel = f"{self.sim_model1.model_name}" if xlabel is None else xlabel
-        ylabel = f"{self.sim_model2.model_name}" if ylabel is None else ylabel
+        xlabel = f"{self.sim_model2.model_name}" if xlabel is None else xlabel
+        ylabel = f"{self.sim_model1.model_name}" if ylabel is None else ylabel
 
         ax = sns.heatmap(self.sim_matrix, cmap=plot_cmap, cbar=True)
         ax.set(xlabel=xlabel, ylabel=ylabel, title=title)
