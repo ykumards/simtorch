@@ -6,6 +6,8 @@ A Pytorch library to measure the similarity between two neural network represent
 
 * Centered Kernel Alignment (CKA) - [Kornblith, et al, ICML 2019](http://proceedings.mlr.press/v97/kornblith19a.html)
 * Deconfounded CKA - [Cui, et al, NeurIPS 2022](https://openreview.net/pdf?id=mMdRZipvld2)
+* Procrustes [WIP]
+* CCA [WIP]
 
 
 ## Design
