@@ -48,13 +48,10 @@ class DeltaCKA(BaseSimilarity):
 
     def linear_HSIC(
         self,
-        X: torch.tensor,
-        Y: torch.tensor,
+        L_X: torch.tensor,
+        L_Y: torch.tensor,
         input_confounders: torch.tensor,
     ):
-        L_X = torch.matmul(X, X.T)
-        L_Y = torch.matmul(Y, Y.T)
-
         input_grammian = (
             torch.matmul(input_confounders, input_confounders.T).view(-1, 1)
         )
@@ -79,18 +76,16 @@ class DeltaCKA(BaseSimilarity):
 
     def linear_CKA(
         self,
-        X: torch.tensor,
-        Y: torch.tensor,
+        L_X: torch.tensor,
+        L_Y: torch.tensor,
         input_confounders: torch.tensor,
     ):
-        X = self._normalize(X.to(self.device))
-        Y = self._normalize(Y.to(self.device))
         input_confounders = self._normalize(
             input_confounders.to(self.device))
 
-        hsic, pve_1, pve_2 = self.linear_HSIC(X, Y, input_confounders)
-        var1 = torch.sqrt(self.linear_HSIC(X, X, input_confounders)[0])
-        var2 = torch.sqrt(self.linear_HSIC(Y, Y, input_confounders)[0])
+        hsic, pve_1, pve_2 = self.linear_HSIC(L_X, L_Y, input_confounders)
+        var1 = torch.sqrt(self.linear_HSIC(L_X, L_X, input_confounders)[0])
+        var2 = torch.sqrt(self.linear_HSIC(L_Y, L_Y, input_confounders)[0])
 
         return (hsic / (var1 * var2)).detach().cpu(), pve_1, pve_2
 
@@ -108,13 +103,16 @@ class DeltaCKA(BaseSimilarity):
 
             # iterate through layers
             for i, (_, activation1) in enumerate(self.sim_model1.model_activations.items()):
-                activation1 = activation1.view(batch_size, -1)
+                X = self._normalize(activation1.view(batch_size, -1).to(self.device))
+                L_X = torch.matmul(X, X.T)
+
                 for j, (_, activation2) in enumerate(self.sim_model2.model_activations.items()):
-                    activation2 = activation2.view(batch_size, -1)
+                    Y = self._normalize(activation2.view(batch_size, -1).to(self.device))
+                    L_Y = torch.matmul(Y, Y.T)
 
                     layer_cka, _, _ = self.linear_CKA(
-                        X=activation1,
-                        Y=activation2,
+                        L_X=L_X,
+                        L_Y=L_Y,
                         input_confounders=input_confounders,
                     )
                     batch_cka_matrix[i, j] = layer_cka.item()

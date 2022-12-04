@@ -32,18 +32,13 @@ class CKA(BaseSimilarity):
         H = identity - unit / n
         return torch.matmul(torch.matmul(H, K), H)
 
-    def linear_HSIC(self, X: torch.tensor, Y: torch.tensor):
-        L_X = torch.matmul(X, X.T)
-        L_Y = torch.matmul(Y, Y.T)
+    def linear_HSIC(self, L_X: torch.tensor, L_Y: torch.tensor):
         return torch.sum(self._centering(L_X) * self._centering(L_Y))
 
-    def linear_CKA(self, X: torch.tensor, Y: torch.tensor):
-        X = self._normalize(X.to(self.device))
-        Y = self._normalize(Y.to(self.device))
-
-        hsic = self.linear_HSIC(X, Y)
-        var1 = torch.sqrt(self.linear_HSIC(X, X))
-        var2 = torch.sqrt(self.linear_HSIC(Y, Y))
+    def linear_CKA(self, L_X: torch.tensor, L_Y: torch.tensor):
+        hsic = self.linear_HSIC(L_X, L_Y)
+        var1 = torch.sqrt(self.linear_HSIC(L_X, L_X))
+        var2 = torch.sqrt(self.linear_HSIC(L_Y, L_Y))
 
         return (hsic / (var1 * var2)).detach().cpu()
 
@@ -51,7 +46,7 @@ class CKA(BaseSimilarity):
         cka_matrices = []
         for X, *_ in tqdm(dataloader, total=len(dataloader)):
             X = X.to(self.device)
-            N = X.shape[0]
+            batch_size = X.shape[0]
 
             # forward passes to activate hooks
             _ = self.sim_model1.model(X)
@@ -61,10 +56,14 @@ class CKA(BaseSimilarity):
 
             # iterate through layers
             for i, (_, activation1) in enumerate(self.sim_model1.model_activations.items()):
-                activation1 = activation1.view(N, -1)
+                X = self._normalize(activation1.view(batch_size, -1).to(self.device))
+                L_X = torch.matmul(X, X.T)
+
                 for j, (_, activation2) in enumerate(self.sim_model2.model_activations.items()):
-                    activation2 = activation2.view(N, -1)
-                    layer_cka = self.linear_CKA(X=activation1, Y=activation2)
+                    Y = self._normalize(activation2.view(batch_size, -1).to(self.device))
+                    L_Y = torch.matmul(Y, Y.T)
+
+                    layer_cka = self.linear_CKA(L_X=L_X, L_Y=L_Y)
 
                     batch_cka_matrix[i, j] = layer_cka.item()
 
