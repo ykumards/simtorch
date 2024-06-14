@@ -33,7 +33,7 @@ myst-parser>=0.15.2,<0.19.0
 sphinx-copybutton==0.5.2
 
 # Live rebuilding and reloading of docs for developing locally.
-sphinx-autobuild==2021.3.14
+sphinx-autobuild==2024.4.16
 
 # Automatically adds types to docs
 sphinx-autodoc-typehints
