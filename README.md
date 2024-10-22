@@ -5,7 +5,7 @@
 A Pytorch library to measure the similarity between two neural network representations. The library currently supports the following (dis)similarity measures:
 
 * Centered Kernel Alignment (CKA) - [Kornblith, et al, ICML 2019](http://proceedings.mlr.press/v97/kornblith19a.html)
-* Deconfounded CKA - [Cui, et al, NeurIPS 2022](https://openreview.net/pdf?id=mMdRZipvld2)
+* Deconfounded CKA - [Cui, et al, NeurIPS 2022](https://papers.nips.cc/paper_files/paper/2022/hash/79cbf4f96c2bcc67267421154da689dd-Abstract-Conference.html)
 * Procrustes [WIP]
 * CCA [WIP]
 
