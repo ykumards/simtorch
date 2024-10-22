@@ -72,6 +72,6 @@ class CKA(BaseSimilarity):
         self.sim_matrix = np.zeros_like(batch_cka_matrix)
         for mat in cka_matrices:
             self.sim_matrix += mat
-        self.sim_matrix /= len(batch_cka_matrix)
+        self.sim_matrix /= len(cka_matrices)
 
         return self.sim_matrix
